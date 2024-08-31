@@ -62,5 +62,11 @@ return response()->json(["status"=>"ok"]);
         return redirect()->route('locais.index')->with('success', 'Local Atualizado com sucesso!');
     }
 
+    public function editlocais(Request $request ,$id)
+    {
+        $locais = Locais::find($id);
+        return response()->json($locais);
+    }
+
     
 }

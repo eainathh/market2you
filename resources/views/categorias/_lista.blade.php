@@ -3,7 +3,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3>{{ $categoria->nome }}</h3>
                         <div>
-                            <a href="{{route('categorias.edit',['id'=>$categoria->id])}}" class=" btn-sm btn-outline-primary edit-local">
+                            <a href="{{route('categorias.edit',['id'=>$categoria->id])}}" class=" btn-sm btn-outline-primary edit-categoria">
                                 <i class="fa-solid icone fa-pen"></i>
                             </a>
                             

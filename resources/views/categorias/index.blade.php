@@ -189,7 +189,7 @@
 
 
         // Abre o Modal
-        $("body").on('click', '.edit-local', function(e) {
+        $("body").on('click', '.edit-categoria', function(e) {
             e.preventDefault();
 
 

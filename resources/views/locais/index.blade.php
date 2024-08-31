@@ -199,8 +199,11 @@
         }
         
         lista()
+        
         var myModal = new bootstrap.Modal(document.getElementById('editModal'))
 
+        
+        
         // Abre o Modal
         $("body").on('click', '.edit-local', function(e){
             e.preventDefault();
