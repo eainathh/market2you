@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('listadecompras', function (Blueprint $table) {
             $table->id();
-            $table->date('data');
+            $table->date('data')->nullable();
             $table->decimal('valor_total');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('local_id');

@@ -9,6 +9,10 @@ class Listadecompras extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'data' => 'date'
+    ];
+
     protected $fillable = [
         'data',
         'valor_total',
@@ -32,5 +36,8 @@ class Listadecompras extends Model
     {
         return $this->hasMany(ItensCompra::class, 'listacompra_id');
     }
+
+
+    
     
 }

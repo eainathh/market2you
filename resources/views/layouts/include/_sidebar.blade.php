@@ -42,7 +42,8 @@
             <i class="fa-regular fa-note-sticky"></i>
             <p>Relatórios</p>
         </a>
-    </li>
+    </li>--}}
+    
     <li class="nav-item">
         <a href="{{route('dashboard.index')}}">
             <i class="fa-solid fa-chart-simple"></i>
@@ -54,5 +55,5 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             <p>Buscar Melhores preços</p>
         </a>
-    </li> --}}
+    </li> 
 </ul>

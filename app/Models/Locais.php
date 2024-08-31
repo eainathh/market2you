@@ -10,7 +10,10 @@ class Locais extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome'];
+    protected $fillable = [
+        'nome',
+        'usuario_id'
+    ];
     
     // protected static function boot()
     // {

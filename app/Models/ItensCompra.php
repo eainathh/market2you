@@ -26,4 +26,9 @@ class ItensCompra extends Model
     {
         return $this->belongsTo(Itens::class, 'item_id');
     }
+
+    public function sub_total()
+    {
+        return $this->valor_unitario * $this->quantidade;
+    }
 }

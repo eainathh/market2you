@@ -13,7 +13,7 @@
                     <div class="row align-items-end">
 
                         <!-- Linha do Mercado -->
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-7">
                             <div class="mb-3">
                                 <label for="mercado" class="form-label">
                                     Mercado <i class="fas fa-shopping-cart"></i>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <!-- Linha da pesquisa -->
-                        <div class=" col-12 col-md-6 col-lg-4">
+                        <div class=" col-12 col-md-6  col-xl-7">
                             <div class="mb-3 row">
                                 <div class="input-group">
                                     <select class="form-select select2" placeholder="Buscar itens na lista">
@@ -48,10 +48,10 @@
                                             <option value="{{ $item->id }}">{{ $item->nome }}</option>
                                         @endforeach
                                     </select>
-                                    <button class="btn btn-outline-info btn-sm ms-2" type="button"
-                                        id="addItemButton">ADD</button>
+                                    <button class="btn btn-success btn-sm ms-2 " type="button"
+                                        id="addItemButton">Add</button>
                                     <input type="hidden" name="lista_id" value="{{ $listadecompras->first()->id }}">
-                                    <!-- Use o ID da lista de compras -->
+
                                 </div>
                             </div>
                         </div>
@@ -59,30 +59,30 @@
 
 
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="fw-bold">Listagem</p>
+                        <p class="fw-bold mt-1">Listagem</p>
                         <p>10/100</p>
                     </div>
 
                     <hr>
 
                     <div class="row align-items-end mb-3">
-                        <div class="col-sm mb-3">
+                        <div class=" col-lg-3 mb-3 ">
                             <div class="input-group">
                                 <span class="input-group-text">Item</span>
                                 <input type="text" class="form-control" aria-label="Item">
                             </div>
                         </div>
-                        <div class="col-3 mb-3">
-                            <input type="number" placeholder="Quantidade" class="form-control" pattern="\d*" />
+                        <div class="col-4 col-lg-3 mb-3">
+                            <input type="number" placeholder="Qtd" class="form-control" pattern="\d*" />
                         </div>
-                        <div class="col-md-auto col-6 mb-3">
+                        <div class="col-5 col-lg-3 mb-3">
                             <div class="input-group">
                                 <span class="input-group-text">R$</span>
                                 <input type="text" class="form-control"
-                                    aria-label="Valor do item"placeholder="Valor unitário">
+                                    aria-label="Valor do item"placeholder="Valor">
                             </div>
                         </div>
-                        <div class="col mb-3">
+                        <div class="col  mb-3">
                             <button class="btn btn-success" id="btn-advance">+</button>
                         </div>
                     </div>
@@ -97,7 +97,4 @@
         </div>
     </div>
     </div>
-
-
-   
 @endsection

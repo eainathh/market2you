@@ -12,16 +12,7 @@ use App\Models\locais;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 
 
@@ -32,12 +23,19 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
 // Locais
 Route::get('/locais',[LocalController::class, 'index'])->name('locais.index');
+Route::get('/getlocais',[LocalController::class, 'getlocais'])->name('locais.getlocais');
 Route::post('/locais/store', [LocalController::class, 'store'])->name('locais.store');
+Route::delete('/categoriaslocais/{id}',[LocalController::class, 'destroy'])->name('locais.destroy');
+Route::get('/editlocais/{id}',[LocalController::class, 'editlocais'])->name('locais.edit');
+Route::put('/locais/{id?}', [LocalController::class, 'update'])->name('locais.update');
 
 // Categorias
 Route::get('/categorias',[CategoriaController::class, 'index'])->name('categorias.index');
-Route::post('/categorias',[CategoriaController::class, 'store'])->name('categorias.store');
-Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
+Route::get('/getcategorias',[CategoriaController::class, 'getcategorias'])->name('categorias.getcategorias');
+Route::get('/editcategorias/{id}',[CategoriaController::class, 'categoriasEdit'])->name('categorias.edit');
+Route::post('/categoriasstore',[CategoriaController::class, 'store'])->name('categorias.store');
+Route::put('/updatecategorias/{id?}', [CategoriaController::class, 'updateCategorias'])->name('categorias.update');
+Route::get('/editcategorias/{id}', [CategoriaController::class, 'categoriasEdit'])->name('categorias.edit');
 Route::delete('/categorias/{id}',[CategoriaController::class, 'destroy'])->name('categorias.destroy');
 
 

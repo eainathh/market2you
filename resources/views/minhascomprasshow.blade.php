@@ -65,7 +65,7 @@
             <div class="col">
                 <h2 class="fw-bold">{{ $compra->local->nome }}</h2>
                 <div class="header-local">
-                    <h4>Data da compra: {{ \Carbon\Carbon::parse($compra->data)->format('d/m/Y') }}</h4>
+                    <h4>Data da compra: {{ $compra->data->format('d/m/Y') }}</h4>
                     <h4>Valor total: R${{ number_format($compra->valor_total, 2, ',', '.') }}</h4>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                                             {{ $item->itens->nome }}
                                         </div>
                                         <div class="item-details">
-                                            Valor Unitário: R$ 1,50
+                                            Valor Unitário: R$ {{ number_format($item->valor_unitario, 2, ',', '.') }}
                                         </div>
                                         <div class="item-details">
                                             Quantidade: {{ $item->quantidade }}
@@ -100,7 +100,7 @@
                                     </div>
                                 </td>
                                 <td class="total-value">
-                                    R$ 10,00
+                                    Valor Total: R$ {{ number_format($item->sub_total(), 2, ',', '.') }}
                                 </td>
                             </tr>
                         @endforeach

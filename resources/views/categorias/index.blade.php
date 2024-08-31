@@ -42,7 +42,7 @@
         }
 
         .modal-content {
-            
+
             min-width: 350px;
             margin: auto;
         }
@@ -51,7 +51,7 @@
             position: fixed;
             top: 1rem;
             right: 10rem;
-            z-index: 1050; 
+            z-index: 1050;
             transition: opacity 0.5s ease-out;
         }
 
@@ -80,15 +80,15 @@
                 </div>
             </div>
 
-            @if (session('success'))
-            <div id="success-alert" class="alert alert-success" role="alert">
-                {{ session('success') }}
+            {{-- @if (session('success'))
+                <div id="success-alert" class="alert alert-success" role="alert">
+                    {{ session('success') }}
                 </div>
-            @endif
+            @endif --}}
 
             <div class="collapse" id="addcategoria">
                 <div class="card-body">
-                    <form action="{{ route('categorias.store') }}" method="POST">
+                    <form action="{{ route('categorias.store') }}" method="POST" id="form-store-categorias">
                         @csrf
                         <input type="text" class="form-control" name="categoria"
                             placeholder="Digite o nome da categoria">
@@ -96,49 +96,34 @@
                     </form>
                 </div>
             </div>
-            @foreach ($categorias as $categoria)
-                <div class="listagem card p-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3>{{ $categoria->nome }}</h3>
-                        <div>
 
+            <div id="resposta">
 
-
-                            <a href="#" class="btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#editModal" data-id="{{ $categoria->id }}"
-                                data-nome="{{ $categoria->nome }}">
-                                <i class="fa-solid icone fa-pen"></i>
-                            </a>
-                                <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-sm btn-outline-danger" style="border: none; background: none; padding: 0;">
-                                        <i class="fa-solid icone fa-trash"></i>
-                                    </button>
-                                </form>
-                        </div>
-
-                    </div>
-
-                </div>
-            @endforeach
-
+            </div>
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    {{-- <div class="row justify-content-center">
         <div class="col-auto text-center">
 
             {!! $categorias->links() !!}
 
         </div>
-    </div>
+    </div> --}}
 
+
+    {{-- Modal de edição --}}
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form method="POST" id="editForm">
-                @csrf
+
+
+            <form action="{{ route('categorias.update') }}" method="POST"id="form-update-categorias">
+
+
                 @method('PUT')
+                @csrf
+
+
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Editar Categoria</h5>
@@ -151,51 +136,102 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        
+
                         <button type="submit" class="btn btn-primary">Atualizar</button>
                     </div>
                 </div>
             </form>
         </div>
+
     </div>
 @endsection
 
 
 @section('scripts')
     <script>
-        // Script para o modal de edição
-        var editModal = document.getElementById('editModal');
-        editModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget;
-            var categoriaId = button.getAttribute('data-id');
-            var categoriaNome = button.getAttribute('data-nome');
+        // ajax para criar a categoria sem recarregar a página
 
-            var modalTitle = editModal.querySelector('.modal-title');
-            var editCategoriaInput = editModal.querySelector('#editCategoriaInput');
-            var editForm = editModal.querySelector('#editForm');
+        $("#form-store-categorias").submit(function(e) {
+            e.preventDefault();
 
-            modalTitle.textContent = 'Editar Categoria';
-            editCategoriaInput.value = categoriaNome;
-            editForm.action = '/categorias/' + categoriaId;
+            $.ajax({
+                method: "POST",
+                data: $(this).serialize(),
+                url: $(this).attr('action'),
+            }).done(function(data) {
+                console.log(data)
+                carregalista()
+                myModal.hide();
+                $("#form-store-categorias")[0].reset()
+            }).fail(function(data) {
+
+                $.toast({
+                    title: "Atenção",
+                    message: data.responseJSON.error,
+                    type: "error",
+                    duration: 2500,
+                });
+            })
+        })
+
+        function carregalista() {
+            var route = "{{ route('categorias.getcategorias') }}";
+
+            $.get(route, function(data) {
+                $('#resposta').html(data)
+            })
+        }
+
+        carregalista()
+
+        // inicia o modal
+        // var myModal = new bootstrap.Modal(document.getElementById('editModal'))
+
+
+        // Abre o Modal
+        $("body").on('click', '.edit-local', function(e) {
+            e.preventDefault();
+
+
+            var route = $(this).attr('href');
+
+            $.get(route, function(data) {
+                $('#editCategoriaInput').val(data.nome);
+
+                var updateUrl = "{{ route('categorias.update', ['id' => '']) }}/" + data.id;
+
+                $('#form-update-categorias').attr("action", updateUrl);
+
+            })
+            var myModal = new bootstrap.Modal(document.getElementById('editModal'));
+            myModal.show();
         });
 
-        // Script para o alerta de sucesso
-        document.addEventListener('DOMContentLoaded', function() {
-            var alert = document.getElementById('success-alert');
-            if (alert) {
-                // Defina o tempo em milissegundos que o alerta ficará visível
-                var displayTime = 3000; 
 
+        // Atualizar dados
 
-                setTimeout(function() {
-                    alert.style.opacity = '0'; 
-                }, displayTime);
+        $("#form-update-categorias").submit(function(e) {
+            e.preventDefault();
 
-                
-                setTimeout(function() {
-                    alert.remove();
-                }, displayTime + 500); 
-            }
-        });
+            $.ajax({
+                method: "POST",
+                data: $(this).serialize(),
+                url: $(this).attr('action')
+            }).done(function(data) { //define o que vai fazer quando deu certo
+                console.log(data)
+                carregalista()
+                $('#editModal').modal('hide');
+                $("#form-update-categorias")[0].reset()
+
+            }).fail(function(data) { // define o que vai fazer quando dá erro
+
+                $.toast({
+                    title: "Atenção",
+                    message: data.responseJSON.error,
+                    type: "error",
+                    duration: 2500,
+                });
+            })
+        })
     </script>
 @endsection

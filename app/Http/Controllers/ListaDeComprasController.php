@@ -13,19 +13,20 @@ class ListaDeComprasController extends Controller
     {
         $listadecompras = Listadecompras::with('local')->paginate('10');
         $itens = Itens::all();
-        
-        return view('lista', compact('listadecompras', 'itens'));    
+
+        return view('lista', compact('listadecompras', 'itens'));
     }
 
     public function create()
     {
-        $itens = Itens::all();        
+        $itens = Itens::all();
         $locais = Locais::orderBy('nome', 'asc')->get();
         $listadecompras = new Listadecompras();
         return view('listacreate', compact('locais', 'itens', 'listadecompras'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'item_id' => 'required|exists:itens,id',
             'lista_id' => 'required|exists:listadecompras,id',
@@ -33,7 +34,7 @@ class ListaDeComprasController extends Controller
         ]);
 
         $listadecompra = Listadecompras::find($request->input('lista_id'));
-        $item =Itens::find($request->input('item_id'));
+        $item = Itens::find($request->input('item_id'));
 
         $listadecompra->itens_compras()->create([
             'item_id' => $request->input('item_id'),
@@ -45,6 +46,4 @@ class ListaDeComprasController extends Controller
             'item_name' => $item->nome
         ]);
     }
-    
-
 }

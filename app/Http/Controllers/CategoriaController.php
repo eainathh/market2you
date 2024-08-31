@@ -10,10 +10,18 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categorias::orderBy('created_at', 'desc')->paginate(10);
+        $categorias = Categorias::orderBy('created_at', 'desc')->get();
 
 
-        return view('categorias', compact('categorias'));
+        return view('categorias.index', compact('categorias'));
+    }
+
+    public function getcategorias()
+    {
+        $categorias = Categorias::orderBy('created_at', 'desc')->get();
+
+
+        return view('categorias._lista', compact('categorias'));
     }
 
     public function store(Request $request)
@@ -29,7 +37,7 @@ class CategoriaController extends Controller
         return redirect()->route('categorias.index')->with('success', 'Categoria criada com sucesso!');
     }
 
-    public function update(Request $request, $id)
+    public function updateCategorias(Request $request, $id)
     {
 
         $request->validate([
@@ -37,11 +45,12 @@ class CategoriaController extends Controller
         ]);
 
         $categoria = Categorias::find($id);
+        
         $categoria->update([
             'nome' => $request->input('categoria'),
         ]);
 
-        return redirect()->route('categorias.index')->with('success', 'Categoria atualizada com sucesso!');
+        return response()->json($categoria);
     }
 
     public function destroy($id)
@@ -51,5 +60,11 @@ class CategoriaController extends Controller
         $categoria->delete();
 
         return redirect()->route('categorias.index')->with('success', 'Categoria excluida com sucesso!');
+    }
+
+    public function categoriasEdit(Request $request, $id)
+    {
+        $categoria = Categorias::find($id);
+        return response()->json($categoria);
     }
 }
