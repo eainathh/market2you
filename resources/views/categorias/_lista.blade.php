@@ -18,7 +18,7 @@
                                 style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-sm btn-outline-danger"
+                                <button type="submit" class="btn-sm delete-categoria btn-outline-danger" data-id="{{$categoria->id}}"
                                     style="border: none; background: none; padding: 0;">
                                     <i class="fa-solid icone fa-trash"></i>
                                 </button>

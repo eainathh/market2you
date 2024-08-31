@@ -77,7 +77,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            
+
             <div class="collapse " id="addlocal">
                 <div class=" card-body">
                     <form action="{{ route('locais.store') }}" method="POST" id="form-store">
@@ -88,7 +88,7 @@
                     </form>
                 </div>
             </div>
-            
+
 
             <div id="resultado">
 
@@ -189,30 +189,29 @@
 
         })
 
-        function lista()
-        {
-            var route= "{{route('locais.getlocais')}}";
+        function lista() {
+            var route = "{{ route('locais.getlocais') }}";
 
-            $.get(route,function(data){
+            $.get(route, function(data) {
                 $('#resultado').html(data)
             })
         }
-        
+
         lista()
-        
+
         var myModal = new bootstrap.Modal(document.getElementById('editModal'))
 
-        
-        
+
+
         // Abre o Modal
-        $("body").on('click', '.edit-local', function(e){
+        $("body").on('click', '.edit-local', function(e) {
             e.preventDefault();
 
             var route = $(this).attr('href')
 
-            $.get(route, function(data){
+            $.get(route, function(data) {
                 $('#editLocalInput').val(data.nome)
-                $('#editForm').attr("action","{{route('locais.update')}}/"+data.id)
+                $('#editForm').attr("action", "{{ route('locais.update') }}/" + data.id)
                 myModal.show()
             })
 
@@ -220,19 +219,19 @@
 
         //Ajax para salvar os dados
 
-        $("#editForm").submit(function(e){
+        $("#editForm").submit(function(e) {
             e.preventDefault();
 
             $.ajax({
                 method: "POST",
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
-            }).done(function(data){
+            }).done(function(data) {
                 console.log(data)
                 lista()
                 myModal.hide()
-                ("#editForm")[0].reset()                
-            }).fail(function(data){
+                    ("#editForm")[0].reset()
+            }).fail(function(data) {
 
                 $.toast({
                     title: "Atenção",
@@ -244,7 +243,27 @@
         })
 
 
+        // Deletando local sem atualizar a página
 
+        $("body").on('click', '.delete-local', function(e) {
+            e.preventDefault();
 
+            var id = $(this).data('id');
+            var url = "{{ route('locais.destroy', ['id' => ':id']) }}".replace(':id', id); 
+
+            $.ajax({
+                method: 'DELETE',
+                url: url,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    
+                    lista(); 
+                },
+
+            })
+
+        })
     </script>
 @endsection

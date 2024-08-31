@@ -59,7 +59,7 @@ class CategoriaController extends Controller
 
         $categoria->delete();
 
-        return redirect()->route('categorias.index')->with('success', 'Categoria excluida com sucesso!');
+        return response()->json();
     }
 
     public function categoriasEdit(Request $request, $id)

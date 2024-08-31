@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 Route::get('/locais',[LocalController::class, 'index'])->name('locais.index');
 Route::get('/getlocais',[LocalController::class, 'getlocais'])->name('locais.getlocais');
 Route::post('/locais/store', [LocalController::class, 'store'])->name('locais.store');
-Route::delete('/categoriaslocais/{id}',[LocalController::class, 'destroy'])->name('locais.destroy');
+Route::delete('/locais/{id}',[LocalController::class, 'destroy'])->name('locais.destroy');
 Route::get('/editlocais/{id}',[LocalController::class, 'editlocais'])->name('locais.edit');
 Route::put('/locais/{id?}', [LocalController::class, 'update'])->name('locais.update');
 

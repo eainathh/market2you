@@ -178,6 +178,7 @@
             var route = "{{ route('categorias.getcategorias') }}";
 
             $.get(route, function(data) {
+                //console.log(data);
                 $('#resposta').html(data)
             })
         }
@@ -233,5 +234,32 @@
                 });
             })
         })
+
+
+
+        // Deletar a categoria sem atualizar a página
+
+        $("body").on('click', '.delete-categoria', function(e){
+            e.preventDefault();
+
+            var id = $(this).data('id');
+            var url = "{{route('categorias.destroy', ['id' => ':id']) }}".replace(':id', id); 
+
+            $.ajax({
+                method: 'DELETE',
+                url: url,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response){
+
+                    carregalista()
+                },
+                error: function() {
+        console.error('Erro ao excluir a categoria');
+    }
+            })
+        })
+
     </script>
 @endsection

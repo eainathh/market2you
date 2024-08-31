@@ -46,7 +46,7 @@ return response()->json(["status"=>"ok"]);
         $locais = Locais::find($id);
         $locais->delete();
 
-        return redirect()->route('locais.index')->with('success', 'Local excluído com sucesso!');
+        return response()->json();
     }
 
     public function update(Request $request, $id)

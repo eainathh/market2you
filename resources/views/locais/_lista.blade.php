@@ -10,11 +10,10 @@
                                 data-bs-target="#editModal" data-id="{{ $local->id }}" data-nome="{{ $local->nome }}">
                                 <i class="fa-solid icone fa-pen"></i>
                             </a> --}}
-                            <form action="{{ route('locais.destroy', $local->id) }}" method="POST"
-                                style="display: inline;">
+                            <form action="{{ route('locais.destroy', $local->id) }}" method="POST"style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-sm btn-outline-danger"
+                                <button type="submit" class="btn-sm delete-local btn-outline-danger" data-id="{{ $local->id }}"
                                     style="border: none; background: none; padding:0;">
                                     <i class="fa-solid icone fa-trash"></i>
                                 </button>
