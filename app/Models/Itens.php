@@ -10,7 +10,6 @@ class Itens extends Model
     use HasFactory;
 
     protected $fillable = [
-        'categoria_id',
         'nome',
         'marca',
         'valor_unitario',

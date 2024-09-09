@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ItensCompraController;
 use App\Http\Controllers\ListaDeComprasController;
 use App\Http\Controllers\LocalController;
 use App\Http\Controllers\MelhoresPrecosController;
 use App\Http\Controllers\MinhasComprasController;
 use App\Http\Controllers\RelatoriosController;
 use App\Models\Categorias;
+use App\Models\ItensCompra;
 use App\Models\locais;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,7 +60,15 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.i
 
 //Busca melhores preços
 Route::get('/melhoresprecos',[MelhoresPrecosController::class, 'index'])->name('melhoresprecos.index');
-    
+
+// Itens compras
+Route::post('/itenscompras/additem',[ItensCompraController::class, 'addItem'])->name('itenscompras.additem');
+Route::get('/getitens',[ItensCompraController::class, 'getitens'])->name('itens.getitens');
+
+// Itens
+Route::post('/itens/store',[ItemController::class,'store'])->name('item.store');
+
+
 
 });
 

@@ -89,11 +89,5 @@
             @endforeach
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-4 text-center">
-
-            {!! $listadecompras->links() !!}
-
-        </div>
-    </div>
+   
 @endsection

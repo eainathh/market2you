@@ -127,39 +127,8 @@
 
 @section('scripts')
     <script>
-        // Script para o modal de edição
-        // var editModal = document.getElementById('editModal');
-        // editModal.addEventListener('show.bs.modal', function(event) {
-        //     var button = event.relatedTarget;
-        //     var localId = button.getAttribute('data-id');
-        //     var localNome = button.getAttribute('data-nome');
-
-        //     var modalTitle = editModal.querySelector('.modal-title');
-        //     var editLocalInput = editModal.querySelector('#editLocalInput');
-        //     var editForm = editModal.querySelector('#editForm');
-
-        //     modalTitle.textContent = 'Editar Local';
-        //     editLocalInput.value = localNome;
-        //     editForm.action = '/locais/' + localId;
-        // });
-        // // Script para o alerta de sucesso
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     var alert = document.getElementById('success-alert');
-        //     if (alert) {
-        //         // Defina o tempo em milissegundos que o alerta ficará visível
-        //         var displayTime = 3000;
-
-
-        //         setTimeout(function() {
-        //             alert.style.opacity = '0';
-        //         }, displayTime);
-
-
-        //         setTimeout(function() {
-        //             alert.remove();
-        //         }, displayTime + 500);
-        //     }
-        // });
+        
+        
 
 
         // ajax para criar o local sem recarregar a página
@@ -249,7 +218,7 @@
             e.preventDefault();
 
             var id = $(this).data('id');
-            var url = "{{ route('locais.destroy', ['id' => ':id']) }}".replace(':id', id); 
+            var url = "{{ route('locais.destroy', ['id' => ':id']) }}".replace(':id', id);
 
             $.ajax({
                 method: 'DELETE',
@@ -258,8 +227,8 @@
                     _token: "{{ csrf_token() }}",
                 },
                 success: function(response) {
-                    
-                    lista(); 
+
+                    lista();
                 },
 
             })

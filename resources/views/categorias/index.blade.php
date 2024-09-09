@@ -239,11 +239,11 @@
 
         // Deletar a categoria sem atualizar a página
 
-        $("body").on('click', '.delete-categoria', function(e){
+        $("body").on('click', '.delete-categoria', function(e) {
             e.preventDefault();
 
             var id = $(this).data('id');
-            var url = "{{route('categorias.destroy', ['id' => ':id']) }}".replace(':id', id); 
+            var url = "{{ route('categorias.destroy', ['id' => ':id']) }}".replace(':id', id);
 
             $.ajax({
                 method: 'DELETE',
@@ -251,15 +251,12 @@
                 data: {
                     _token: "{{ csrf_token() }}",
                 },
-                success: function(response){
+                success: function(response) {
 
                     carregalista()
                 },
-                error: function() {
-        console.error('Erro ao excluir a categoria');
-    }
+
             })
         })
-
     </script>
 @endsection
