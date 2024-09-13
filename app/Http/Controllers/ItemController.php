@@ -11,7 +11,7 @@ class ItemController extends Controller
     {
         $request->validate([
            
-            'nome' => 'required|string|max:255',
+            'nome' => 'required|string|max:255|unique:itens,nome',
             
         ]);
 
@@ -21,5 +21,13 @@ class ItemController extends Controller
         ]);
 
         return response()->json(['item' => $item]);
+    }
+
+    public function getitens(Request $request)
+    {
+        $itens = Itens::all();
+        $itemName = $request->input('intemName');
+
+        return view('lista._lista',compact('itemName','itens'));
     }
 }

@@ -127,8 +127,7 @@
 
 @section('scripts')
     <script>
-        
-        
+   
 
 
         // ajax para criar o local sem recarregar a página
@@ -143,7 +142,7 @@
                 console.log(data)
                 lista()
                 $("#form-store")[0].reset()
-                // $(".loading").fadeOut('fast')
+                
             }).fail(function(data) {
 
                 $.toast({
@@ -152,7 +151,7 @@
                     type: "error",
                     duration: 2500, // auto-dismiss after 5s
                 });
-                // $(".loading").fadeOut('fast')
+                
             });
 
 

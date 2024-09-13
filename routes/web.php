@@ -11,6 +11,7 @@ use App\Http\Controllers\MinhasComprasController;
 use App\Http\Controllers\RelatoriosController;
 use App\Models\Categorias;
 use App\Models\ItensCompra;
+use App\Models\Listadecompras;
 use App\Models\locais;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,7 @@ Route::delete('/categorias/{id}',[CategoriaController::class, 'destroy'])->name(
 Route::get('/compras',[ListaDeComprasController::class, 'index'])->name('lista.index');
 Route::get('/compras/create', [ListaDeComprasController::class, 'create'])->name('lista.create');
 Route::post('/compras/store',[ListaDeComprasController::class, 'store'])->name('compras.store');
+Route::put('/updatecompras/{id?}',[ListaDeComprasController::class,'update'])->name('compras.update');
 
 
 // Minhas Compras
@@ -62,11 +64,12 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.i
 Route::get('/melhoresprecos',[MelhoresPrecosController::class, 'index'])->name('melhoresprecos.index');
 
 // Itens compras
-Route::post('/itenscompras/additem',[ItensCompraController::class, 'addItem'])->name('itenscompras.additem');
-Route::get('/getitens',[ItensCompraController::class, 'getitens'])->name('itens.getitens');
+Route::post('/itenscompras/{id}',[ItensCompraController::class, 'store'])->name('itenscompras.store');
+
 
 // Itens
 Route::post('/itens/store',[ItemController::class,'store'])->name('item.store');
+Route::get('/getitens',[ItemController::class, 'getitens'])->name('itens.getitens');
 
 
 

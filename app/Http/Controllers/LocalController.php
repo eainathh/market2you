@@ -37,8 +37,7 @@ class LocalController extends Controller
             'nome' => $request->input('local'),
             'usuario_id' => Auth::id(),
         ]);
-return response()->json(["status"=>"ok"]);
-        //return redirect()->route('locais.index')->with('success', 'Local criado com sucesso!');
+        return response()->json(["status" => "ok"]);
     }
 
     public function destroy($id)
@@ -59,14 +58,13 @@ return response()->json(["status"=>"ok"]);
         $locais->update([
             'nome' => $request->input('local'),
         ]);
+
         return redirect()->route('locais.index')->with('success', 'Local Atualizado com sucesso!');
     }
 
-    public function editlocais(Request $request ,$id)
+    public function editlocais(Request $request, $id)
     {
         $locais = Locais::find($id);
         return response()->json($locais);
     }
-
-    
 }
