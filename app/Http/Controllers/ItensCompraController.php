@@ -8,18 +8,34 @@ use Illuminate\Http\Request;
 
 class ItensCompraController extends Controller
 {
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-       
-        $itemCompra = ItensCompra::create([
-            'item_id' => $request->input('item_id'),
-            'quantidade' => $request->input('quantidade'),
-            'valor_unitario' => $request->input('valor_unitario'),            
-            
+
+        $data = $request->except('_token');
+
+        $item = Itens::where('nome', $data['nome'])->first();
+
+        if (!$item){ // se não existir
+
+            $item = Itens::create([  // cria o item 
+                'nome' => $data['nome'],                
+            ]);
+        }
+
+        $itensCompra = ItensCompra::create([
+            'item_id' => $item->id,
+            'listacompra_id' => $data['listacompra_id']
+
         ]);
 
-        return response()->json(['item_compra' => $itemCompra]);
-    }
 
-    
+        return response()->json([
+            'itens_compras' => $itensCompra,
+            'item' => $item
+        ]);
+
+       
+        
+
+    }
 }

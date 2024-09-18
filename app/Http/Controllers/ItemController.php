@@ -28,6 +28,8 @@ class ItemController extends Controller
         $itens = Itens::all();
         $itemName = $request->input('intemName');
 
+        
+
         return view('lista._lista',compact('itemName','itens'));
     }
 }

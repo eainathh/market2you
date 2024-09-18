@@ -64,7 +64,7 @@ Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.i
 Route::get('/melhoresprecos',[MelhoresPrecosController::class, 'index'])->name('melhoresprecos.index');
 
 // Itens compras
-Route::post('/itenscompras/{id}',[ItensCompraController::class, 'store'])->name('itenscompras.store');
+Route::post('/itenscompras/{id?}',[ItensCompraController::class, 'store'])->name('itenscompras.store');
 
 
 // Itens

@@ -33,24 +33,38 @@ class ListaDeComprasController extends Controller
     {
         $data = $request->except('_token');
 
+        if ($data['id_lista'] == '') {
+            $lista = Listadecompras::create([
+                'data' => date('Y-m-d'),
+                'user_id' => Auth::id(),
+                'local_id' => $data['local_id'],
+                'meta' => $data['meta']
 
-        $lista = Listadecompras::create([
-            'data' => date('Y-m-d'),
-            'user_id' => Auth::id(),
-            'local_id' => $data['local_id'],
-        ]);
-        
+            ]);
+        } else {
+            Listadecompras::where('id', $data['id_lista'])
+            ->update([
+                'local_id' => $data['local_id'],
+                'meta' => $data['meta']
+            ]);
+            
+            $lista = Listadecompras::find($data['id_lista']); // criar essa variável para pegar o id
+        }
 
-        return response()->json(['id' => $lista->id]);
+
+
+        return response()->json(['id' => $lista->id]); // passa o id
     }
 
     public function update(Request $request, $id)
     {
-        
+
         $listadecompras = Listadecompras::find($id);
+
         $listadecompras->update([
             'meta' => $request->input('meta'),
         ]);
+
         $listadecompras = Listadecompras::find($id);
 
 

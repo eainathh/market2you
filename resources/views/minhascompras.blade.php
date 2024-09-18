@@ -74,11 +74,12 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-block gap-0">
                         <p>Última compra</p>
-                        <p>{{$listadecompra->data}}</p>
+                        <p>{{ date('d/m', strtotime($listadecompra->data)) }}</p> {{--  para retornar a data formatada em dia e mes d/m --}}
                     </div>
                     <div>
                         <p>Posição</p>
                         <p>5°</p>
+                        
                     </div>
                     <div>
                         <p>Valor</p>

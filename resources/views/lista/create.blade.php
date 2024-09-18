@@ -10,14 +10,14 @@
                 <div class="card-body">
                     <form action="" method="POST" id="form-lista">
                         <div class="row align-items-end">
-                            <input type="hidden" name="id_lista">
+                            <input type="hidden" name="id_lista" id="id_lista">
 
                             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-7">
                                 <div class="mb-3">
                                     <label for="mercado" class="form-label">
                                         Mercado <i class="fas fa-shopping-cart"></i>
                                     </label>
-                                    <select class="form-select" id="mercado" name="local_id">
+                                    <select class="form-select mudanca" id="mercado" name="local_id">
                                         <option>Selecione</option>
                                         @foreach ($locais as $key => $local)
                                             <option value="{{ $local->id }}">{{ $local->nome }}</option>
@@ -29,10 +29,11 @@
 
                             <div class="col-12 col-sm-12">
                                 <div class="mb-3 col-md-4">
-                                    <label for="meta" class="form-label" >Meta orçamentária</label>
+                                    <label for="meta" class="form-label">Meta orçamentária</label>
                                     <div class="input-group">
                                         <span class="input-group-text">R$</span>
-                                        <input type="text" class="form-control" id="meta" name="meta" aria-label="Amount">
+                                        <input type="text" class="form-control mudanca" id="meta" name="meta"
+                                            aria-label="Amount">
                                         <span class="input-group-text">,00</span>
                                     </div>
                                 </div>
@@ -52,9 +53,8 @@
                                         </select>
 
 
-                                        <button class="btn btn-success mt-3 btn-sm ms-2" type="button"
+                                        <button class="btn btn-success btn-sm ms-2" type="button"
                                             id="addItemButton">Adicionar</button>
-                                        <input type="hidden" name="lista_id" value="">
 
                                     </div>
                                 </div>
@@ -77,24 +77,29 @@
         <script>
             function lista() {
                 var route = "{{ route('itens.getitens') }}";
+
                 $.get(route, function(data) {
-                    $('#resultado').html(data);
+
+                    $('#resultado').html(data)
                 });
             }
 
-            lista();
+            // add no itens compras
 
             $("body").on('click', '#addItemButton', function(e) {
                 e.preventDefault();
 
                 var nome = $('#itens-lista').val(); // PEGA O VALOR DO SELECT
                 var itemName = $('#itens-lista option:selected').text();
+                var listacompraId = $('input[name="id_lista"]').val();
 
 
-                var route = "{{ route('item.store') }}";
+                var route =
+                    "{{ route('itenscompras.store') }}"; // aqui precisa criar o item na tabela itenscompras caso nao exista da tabela itens
 
                 var data = {
                     nome: itemName,
+                    listacompra_id: listacompraId,
                     _token: "{{ csrf_token() }}"
                 };
 
@@ -103,7 +108,8 @@
                     data: data,
                     url: route,
                 }).done(function(data) {
-                    lista(itemName);
+
+                    lista();
                 }).fail(function(data) {
                     console.error("Erro ao adicionar o item:", data.responseJSON);
                 });
@@ -111,18 +117,18 @@
 
             // Criando a lista de compra
             $(document).ready(function(e) {
-                $('#mercado').on('change', function() {
+                $('.mudanca').on('change', function() {
 
                     var route = "{{ route('compras.store') }}"
-                    var formData = $('#form-lista').serialize();                    
+                    var formData = $('#form-lista').serialize();
 
                     $.ajax({
                         method: "POST",
                         url: route,
                         data: formData,
-                        
+
                     }).done(function(data) {
-                        
+
                         $('input[name="id_lista"]').val(data.id); // preenche com o id da lista
 
                     })
@@ -131,21 +137,23 @@
 
             })
 
-            $(document).ready(function(e){
-                $('#meta').on('input', function(){
+            $(document).ready(function(e) {
+                $('#meta').on('change', function() {
 
                     var id = $('input[name="id_lista"]').val();
-                    var route = "{{ route('compras.update')}}/" + id
+                    var route = "{{ route('compras.update') }}/" + id
                     var formData = $('#form-lista').serialize();
 
                     $.ajax({
                         method: 'PUT',
                         url: route,
                         data: formData,
-                    }).done(function(data){
-                        $('input[name="meta"]').val(data.meta);
+                    }).done(function(data) {
+                        // $('input[name="meta"]').val(data.meta);
                     })
-                })
-            })
+                });
+
+
+            });
         </script>
     @endsection
