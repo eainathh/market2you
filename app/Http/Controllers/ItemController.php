@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Itens;
+use App\Models\ItensCompra;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -23,13 +24,12 @@ class ItemController extends Controller
         return response()->json(['item' => $item]);
     }
 
-    public function getitens(Request $request)
+    public function getitens(Request $request, $id)
     {
-        $itens = Itens::all();
-        $itemName = $request->input('intemName');
+        $itemCompra = ItensCompra::where('listacompra_id',$id) // onde a listacompra_id é igual ao que esta no id (url)
+        ->with('itens') // traz também o relacionamento
+        ->get();
 
-        
-
-        return view('lista._lista',compact('itemName','itens'));
+        return view('lista._lista', compact('itemCompra'));
     }
 }

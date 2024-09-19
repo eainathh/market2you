@@ -1,0 +1,41 @@
+[33mcommit 92ba21abdcf825230f44de7f3dde2d0b31b87db1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Wed Sep 18 20:56:20 2024 -0300
+
+    criando itens na lista
+
+[33mcommit bb634ec4d918c6d615f7dba6c960e99466706dbe[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Fri Sep 13 13:48:04 2024 -0300
+
+    criando a lista atraves do select do mercado
+
+[33mcommit 3e11a65a875c2ac465ec8015794a66d2f9622a29[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Mon Sep 9 16:06:45 2024 -0300
+
+    criando itens na tela do create lista
+
+[33mcommit cf86a277760810daa757195b243b862e219d2caa[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Sat Aug 31 19:30:52 2024 -0300
+
+    excluindo e editando com ajax
+
+[33mcommit e6ddc1520ebd8aaffec8d46c3f555c8e79305d8f[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Sat Aug 31 17:15:09 2024 -0300
+
+    editando categorias e locais com ajax
+
+[33mcommit 043903b9fb401f849e163f51bbf855a8d3a86be7[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Sat Aug 31 16:38:53 2024 -0300
+
+    editando categorias com ajax
+
+[33mcommit 682e941b930bb1e07f50f7ae08d96eeb06443db9[m
+Author: eainathh <nathaliagsm02@gmail.com>
+Date:   Mon Aug 19 14:57:34 2024 -0300
+
+    criado categorias

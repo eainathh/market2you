@@ -34,8 +34,26 @@ class ItensCompraController extends Controller
             'item' => $item
         ]);
 
-       
-        
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $itenscompras = ItensCompra::find($id);
+        // $data=$request->except('_token');
+        // // $itenscompras->update([
+        // //     'quantidade' => $request->input('quantidade'),
+        // //     'valor_unitario' => $request->input('valor_unitario')
+        // // ]);
+        $itenscompras->update([
+            'quantidade' => $request->input('quantidade'),
+            'valor_unitario' => $request->input('valor_unitario')
+        ]);
+        $itenscompras = ItensCompra::find($id);
+
+        return response()->json([
+            'id' => $itenscompras
+        ]);
 
     }
 }

@@ -65,11 +65,12 @@ Route::get('/melhoresprecos',[MelhoresPrecosController::class, 'index'])->name('
 
 // Itens compras
 Route::post('/itenscompras/{id?}',[ItensCompraController::class, 'store'])->name('itenscompras.store');
+Route::put('/updateitens/{id?}', [ItensCompraController::class, 'update'])->name('itenscompras.update');
 
 
 // Itens
 Route::post('/itens/store',[ItemController::class,'store'])->name('item.store');
-Route::get('/getitens',[ItemController::class, 'getitens'])->name('itens.getitens');
+Route::get('/getitens/{id?}',[ItemController::class, 'getitens'])->name('itens.getitens');
 
 
 

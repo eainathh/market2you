@@ -24,11 +24,16 @@ class ItensCompra extends Model
 
     public function itens()
     {
-        return $this->belongsTo(Itens::class, 'item_id');
+        return $this->hasMany(Itens::class, 'id', 'item_id');
     }
 
     public function sub_total()
     {
         return $this->valor_unitario * $this->quantidade;
     }
+
+    public function item(){
+        return  $this->hasOne(Itens::class, 'id', 'item_id');
+    }
+    
 }

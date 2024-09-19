@@ -9,6 +9,7 @@
                 </div>
                 <div class="card-body">
                     <form action="" method="POST" id="form-lista">
+                        @csrf
                         <div class="row align-items-end">
                             <input type="hidden" name="id_lista" id="id_lista">
 
@@ -75,8 +76,36 @@
 
     @section('scripts')
         <script>
+            $("body").on('blur', '#valor_unitario', function(e) {
+                
+                var id = $('input[name="id_item"]').val();
+                var route = "{{route('itenscompras.update')}}/" + id
+                // var formData = $('#formitenscompra').serialize();
+                // formData.append('_token', '{{ csrf_token() }}');
+                var quantidade = $('input[name="qtd"]').val();
+                var valor_unitario = $('input[name="valor_unitario"]').val();
+
+                var data = {
+                    quantidade: quantidade,
+                    valor_unitario: valor_unitario,
+                    _token: "{{ csrf_token() }}"
+                };
+
+                $.ajax({
+                    method: 'PUT',
+                    url: route,
+                    data: data,
+                }).done(function(data) {
+                    console.log('sucesso')
+                });
+
+            });
+
             function lista() {
-                var route = "{{ route('itens.getitens') }}";
+
+                var listacompraId = $('input[name="id_lista"]').val();
+                var route = "{{ route('itens.getitens') }}/" + listacompraId; // concatenando para passar o id pela url
+
 
                 $.get(route, function(data) {
 
