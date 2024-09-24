@@ -18,7 +18,7 @@
     </li>
 
     <li class="nav-item">
-        <a href="{{ route('minhascompras.index')}}">
+        <a href="{{ route('lista.index')}}">
             <i class="fa-solid fa-cart-shopping"></i>
             <p>Minhas compras</p>
         </a>

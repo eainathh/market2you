@@ -99,7 +99,7 @@
 
 
 
-
+    {{-- MODAL DE EDICAO --}}
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form method="POST" id="editForm">

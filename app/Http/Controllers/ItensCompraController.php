@@ -39,20 +39,33 @@ class ItensCompraController extends Controller
 
     public function update(Request $request, $id)
     {
-        $itenscompras = ItensCompra::find($id);
-        // $data=$request->except('_token');
-        // // $itenscompras->update([
-        // //     'quantidade' => $request->input('quantidade'),
-        // //     'valor_unitario' => $request->input('valor_unitario')
-        // // ]);
-        $itenscompras->update([
-            'quantidade' => $request->input('quantidade'),
-            'valor_unitario' => $request->input('valor_unitario')
-        ]);
-        $itenscompras = ItensCompra::find($id);
+
+        $data = $request->all(); // traz tudo do request e salva na variavel data
+        $sub_total =[]; // inicia o array vazio
+
+        $id = 0;
+        foreach($data['qtd'] as $key => $value){ // percorre cada qtd dos itens, key é o indice e value o valor
+            
+            $count  = $data['valor_unitario'][$key] * $value; // realiza a conta
+
+            $sub_total[$key] = $count; // salva na variavel usando o indice (key)
+
+            ItensCompra::where('id', $key)->update([ // atualiza o item que tem o id desejado
+                'quantidade' => $value,
+                'valor_unitario' => $data['valor_unitario'][$key],
+                'valor_total' => $count,
+            ]);
+            $id = $key;
+
+        }
+       
+        
+        
 
         return response()->json([
-            'id' => $itenscompras
+        'id' => $id,
+        'total' => $count,
+
         ]);
 
     }

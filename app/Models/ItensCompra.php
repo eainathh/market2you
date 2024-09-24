@@ -14,7 +14,8 @@ class ItensCompra extends Model
         'item_id',
         'valor_unitario',
         'quantidade',
-        'status'
+        'status',
+        'valor_total'
     ];
 
     public function listadecompras()
@@ -24,7 +25,7 @@ class ItensCompra extends Model
 
     public function itens()
     {
-        return $this->hasMany(Itens::class, 'id', 'item_id');
+        return $this->belongsTo(Itens::class, 'item_id');
     }
 
     public function sub_total()
@@ -32,8 +33,10 @@ class ItensCompra extends Model
         return $this->valor_unitario * $this->quantidade;
     }
 
-    public function item(){
+    public function item()
+    {
         return  $this->hasOne(Itens::class, 'id', 'item_id');
     }
+
     
 }
