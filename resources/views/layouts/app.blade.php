@@ -3,7 +3,6 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    
     <title>Market2you</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no,user-scalable=no" name="viewport" />
     <link rel="icon" href="assets/img/kaiadmin/logo-market.png" type="image/x-icon" />

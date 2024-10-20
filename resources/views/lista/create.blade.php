@@ -13,7 +13,7 @@
                         <div class="row align-items-end">
                             <input type="hidden" name="id_lista" id="id_lista">
 
-                            <div class="col-lg-4">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-7">
                                 <div class="mb-3">
                                     <label for="mercado" class="form-label">
                                         Mercado <i class="fas fa-shopping-cart"></i>
@@ -43,7 +43,7 @@
 
                             <div class="col-12 col-md-6 col-xl-7">
 
-
+                                @csrf
                                 <div class="mb-3 row">
                                     <div class="input-group">
                                         <select class="form-select select2" id="itens-lista" name="item_id">
@@ -62,12 +62,11 @@
 
                             </div>
                         </div>
+
+                        <div id="resultado">
+
+                        </div>
                     </form>
-
-                    <div id="resultado">
-
-                    </div>
-
                 </div>
 
 
@@ -77,28 +76,27 @@
 
     @section('scripts')
         <script>
-            // atualizando o valor unitario e a quantidade
+            $("body").on('blur', '#valor_unitario', function(e) {
+                
+                var id = $('input[name="id_item"]').val();
+                var route = "{{route('itenscompras.update')}}/" + id
+                // var formData = $('#formitenscompra').serialize();
+                // formData.append('_token', '{{ csrf_token() }}');
+                var quantidade = $('input[name="qtd"]').val();
+                var valor_unitario = $('input[name="valor_unitario"]').val();
 
-            $("body").on('change', '.updatevalue', function(e) {
+                var data = {
+                    quantidade: quantidade,
+                    valor_unitario: valor_unitario,
+                    _token: "{{ csrf_token() }}"
+                };
 
-                var id = $('input[name="id_item"]').val(); // captura o id
-                var route = "{{ route('itenscompras.update') }}/" + id // passando a rota com o id concatenado
-
-                var data = $('#formitenscompras').serialize() // serializando o formulário
-
-                $.ajax({ // enviando as requisicoes para o servidor
+                $.ajax({
                     method: 'PUT',
                     url: route,
-                    data: data
-
+                    data: data,
                 }).done(function(data) {
-                    console.log('Id atualizado: ' + data.id)
-                    console.log('Total atualizado: ' +  data.total)
-                    console.log('Total geral: ' +  data.totalgeral)
-
-                    $('#valor_total_' + data.id).html(data.total) // procura o elemento q tem o ID no formato valor_total_x, x é o id que eu procuro
-                    $('#total_geral' + data.id).html(data.totalgeral);
-                    lista()
+                    console.log('sucesso')
                 });
 
             });
@@ -122,7 +120,7 @@
 
                 var nome = $('#itens-lista').val(); // PEGA O VALOR DO SELECT
                 var itemName = $('#itens-lista option:selected').text();
-                var listacompraId = $('input[name="id_lista"]').val(); // pega o valor desse input
+                var listacompraId = $('input[name="id_lista"]').val();
 
 
                 var route =
