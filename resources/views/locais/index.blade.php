@@ -99,7 +99,7 @@
 
 
 
-    {{-- MODAL DE EDICAO --}}
+
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form method="POST" id="editForm">
@@ -157,15 +157,19 @@
 
         })
 
-        function lista() {
-            var route = "{{ route('locais.getlocais') }}";
+        function lista(url = "{{ route('locais.getlocais') }}") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: 'html',
 
-            $.get(route, function(data) {
-                $('#resultado').html(data)
-            })
+                success: function(response) {
+                    $('#resultado').html(response)
+                },
+            });
         }
-
         lista()
+
 
         var myModal = new bootstrap.Modal(document.getElementById('editModal'))
 
@@ -233,5 +237,12 @@
             })
 
         })
+
+        $(document).on('click', '.pagination a',function(e) {
+            e.preventDefault()
+
+            var url = $(this).attr('href');
+            lista(url);
+        });
     </script>
 @endsection

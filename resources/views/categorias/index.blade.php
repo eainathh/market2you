@@ -174,13 +174,18 @@
             })
         })
 
-        function carregalista() {
-            var route = "{{ route('categorias.getcategorias') }}";
-
-            $.get(route, function(data) {
-                //console.log(data);
-                $('#resposta').html(data)
-            })
+        function carregalista(url = "{{ route('categorias.getcategorias') }}") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: 'html',
+                success: function(response) {
+                    $('#resposta').html(response); // Atualiza o conteúdo da div resposta
+                },
+                error: function(xhr, status, error) {
+                    console.log('Erro ao carregar a lista de categorias: ' + error);
+                }
+            });
         }
 
         carregalista()
@@ -235,6 +240,12 @@
             })
         })
 
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+
+            var url = $(this).attr('href');
+            carregalista(url);
+        });
 
 
         // Deletar a categoria sem atualizar a página

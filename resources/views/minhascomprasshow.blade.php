@@ -23,7 +23,7 @@
             gap: 20px;
         }
 
-        .form-control+.form-control {
+        .form-control + .form-control {
             margin-top: 15px;
         }
 
@@ -62,54 +62,51 @@
 @section('content')
     <div class="container mt-4">
         <div class="row mb-4">
-            @foreach ($compra->itens_compras as $item)
-                <div class="col">
-                    <h2 class="fw-bold">{{ $item->nome }}</h2>
-            @endforeach
-            <div class="header-local">
-                <h4>Data da compra: {{ $compra->data->format('d/m/Y') }}</h4>
-                <h4>Valor total: R${{ number_format($compra->valor_total, 2, ',', '.') }}</h4>
+            <div class="col">
+                <h2 class="fw-bold">{{ $compra->local->nome }}</h2>
+                <div class="header-local">
+                    <h4>Data da compra: {{ $compra->data->format('d/m/Y') }}</h4>
+                    <h4>Valor total: R${{ number_format($compra->valor_total, 2, ',', '.') }}</h4>
+                </div>
+            </div>
+            <div class="col text-end">
+                <button type="button" class="btn btn-primary">Duplicar lista</button>
             </div>
         </div>
-        <div class="col text-end">
-            <button type="button" class="btn btn-primary">Duplicar lista</button>
-        </div>
 
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <table class="table table-light">
-                <thead>
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Valor Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($compra->itens_compras as $item)
+        <div class="row">
+            <div class="col">
+                <table class="table table-light">
+                    <thead>
                         <tr>
-                            <td>
-                                <div class="item-row">
-                                    <div class="item-name">
-                                        {{ $item->itens->nome }}
-                                    </div>
-                                    <div class="item-details">
-                                        Valor Unitário: R$ {{ $item->valor_unitario }}
-                                    </div>
-                                    <div class="item-details">
-                                        Quantidade: {{ $item->quantidade }}
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="total-value">
-                                Valor Total: R$ {{ $item->sub_total() }}
-                            </td>
+                            <th scope="col">Item</th>
+                            <th scope="col">Valor Total</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($compra->itens_compras as $item)
+                            <tr>
+                                <td>
+                                    <div class="item-row">
+                                        <div class="item-name">
+                                            {{ $item->itens->nome }}
+                                        </div>
+                                        <div class="item-details">
+                                            Valor Unitário: R$ {{ number_format($item->valor_unitario, 2, ',', '.') }}
+                                        </div>
+                                        <div class="item-details">
+                                            Quantidade: {{ $item->quantidade }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="total-value">
+                                    Valor Total: R$ {{ number_format($item->sub_total(), 2, ',', '.') }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
     </div>
 @endsection

@@ -13,8 +13,11 @@ class ListaDeComprasController extends Controller
 {
     public function index()
     {
-        $listadecompras = Listadecompras::with('local')->paginate('10');
-        return view('minhascompras', compact('listadecompras'));
+        $listadecompras = Listadecompras::with('local')->paginate('5');
+        $itens = Itens::all();
+
+
+        return view('lista.index', compact('listadecompras', 'itens'));
     }
 
     public function create(Request $request)

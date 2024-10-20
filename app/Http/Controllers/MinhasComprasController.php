@@ -16,9 +16,7 @@ class MinhasComprasController extends Controller
 
     public function show(Request $request, $id)
     {
-        $compra = Listadecompras::with('itens_compras','local')->find($id);
-
-        
+        $compra = Listadecompras::find($id);
 
         return view('minhascomprasshow', compact('compra'));
     }
