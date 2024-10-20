@@ -41,10 +41,10 @@
                             </div>
 
 
-                            <div class="col-12 col-md-6 col-xl-7">
+                            <div class="col-12 row col-md-6 col-xl-7">
 
 
-                                <div class="mb-3 row">
+                                <div class="mb-3 col-xl-5 ">
                                     <div class="input-group">
                                         <select class="form-select select2" id="itens-lista" name="item_id">
                                             <option value="" disabled selected>Buscar itens na lista</option>
@@ -54,7 +54,7 @@
                                         </select>
 
 
-                                        <button class="btn btn-success btn-sm ms-2" type="button"
+                                        <button class="btn btn-success  btn-sm ms-2" type="button"
                                             id="addItemButton">Adicionar</button>
 
                                     </div>
@@ -93,8 +93,8 @@
 
                 }).done(function(data) {
                     console.log('Id atualizado: ' + data.id)
-                    console.log('Total atualizado: ' +  data.total)
-                    console.log('Total geral: ' +  data.totalgeral)
+                    console.log('Total atualizado: ' + data.total)
+                    console.log('Total geral: ' + data.totalgeral)
 
                     $('#valor_total_' + data.id).html(data.total) // procura o elemento q tem o ID no formato valor_total_x, x é o id que eu procuro
                     $('#total_geral' + data.id).html(data.totalgeral);

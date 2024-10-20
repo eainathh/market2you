@@ -174,19 +174,20 @@
             })
         })
 
-        function carregalista() {
-            var route = "{{ route('categorias.getcategorias') }}";
-
-            $.get(route, function(data) {
-                //console.log(data);
-                $('#resposta').html(data)
+        function carregalista(url="{{ route('categorias.getcategorias') }}") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: 'html',
+                success: function(response){
+                    $('#resposta').html(response);
+                }
             })
         }
 
         carregalista()
 
-        // inicia o modal
-        // var myModal = new bootstrap.Modal(document.getElementById('editModal'))
+       
 
 
         // Abre o Modal
@@ -258,5 +259,12 @@
 
             })
         })
+
+        $(document).on('click', '.pagination a',function(e) {
+            e.preventDefault()
+
+            var url = $(this).attr('href');
+            carregalista(url);
+        });
     </script>
 @endsection

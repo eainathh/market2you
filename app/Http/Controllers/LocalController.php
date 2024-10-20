@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Locais;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Ui\Presets\React;
 
 class LocalController extends Controller
 {
@@ -13,7 +12,7 @@ class LocalController extends Controller
     {
 
         $userId = Auth::id();
-        $locais = Locais::orderBy('created_at', 'desc')->get();
+        $locais = Locais::orderBy('created_at', 'desc')->paginate(5);
 
         return view('locais.index', compact('locais'));
     }
@@ -22,22 +21,22 @@ class LocalController extends Controller
     {
 
         $userId = Auth::id();
-        $locais = Locais::orderBy('created_at', 'desc')->get();
+        $locais = Locais::orderBy('created_at', 'desc')->paginate(5);
 
-        return view('locais._lista', compact('locais'));
+        return view('locais._lista', compact('locais'))->render();
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'local' => 'required|string|max:255'
+            'local' => 'required|string|max:255',
         ]);
 
         Locais::create([
             'nome' => $request->input('local'),
             'usuario_id' => Auth::id(),
         ]);
-        return response()->json(["status" => "ok"]);
+        return response()->json(["message" => "Local cadastrado com sucesso!"], 201);
     }
 
     public function destroy($id)
@@ -45,10 +44,10 @@ class LocalController extends Controller
         $locais = Locais::find($id);
         $locais->delete();
 
-        return response()->json();
+        return response()->json(['message' => 'Local deletado']);
     }
 
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
         $request->validate([
             'local' => 'required|string|max:255',

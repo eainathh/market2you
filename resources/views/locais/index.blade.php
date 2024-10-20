@@ -77,21 +77,21 @@
                     {{ session('success') }}
                 </div>
             @endif
-
+            {{-- Collapse Cadastrar Local --}}
             <div class="collapse " id="addlocal">
                 <div class=" card-body">
                     <form action="{{ route('locais.store') }}" method="POST" id="form-store">
                         @csrf
                         <input type="text" class="form-control" name="local" required
                             placeholder="Digite o nome do local">
-                        <button type="submit" class="btn btn-success mt-3">Salvar</button>
+                        <button type="submit" class="btn btn-success my-3">Salvar</button>
                     </form>
                 </div>
             </div>
 
 
             <div id="resultado">
-
+                @include('locais._lista', ['locais' => $locais ?? []])
             </div>
 
         </div>
@@ -127,8 +127,7 @@
 
 @section('scripts')
     <script>
-   
-
+       
 
         // ajax para criar o local sem recarregar a página
         $("#form-store").submit(function(e) {
@@ -139,37 +138,33 @@
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
-                console.log(data)
+                console.log(data);
+                $('#resultado').html(data.html); // Atualiza a listagem se estiver retornando HTML
+                $("#form-store")[0].reset();
                 lista()
-                $("#form-store")[0].reset()
-                
+                // Exibe o SweetAlert com a mensagem retornada
+                swal("Sucesso!", data.message, "success");
+
             }).fail(function(data) {
-
-                $.toast({
-                    title: "Atenção",
-                    message: data.responseJSON.error,
-                    type: "error",
-                    duration: 2500, // auto-dismiss after 5s
-                });
-                
+                swal("Erro!", data.responseJSON.error || "Ocorreu um erro inesperado.", "error");
             });
+        });
 
 
-        })
+        function lista(url = "{{ route('locais.getlocais') }}") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: 'html',
 
-        function lista() {
-            var route = "{{ route('locais.getlocais') }}";
-
-            $.get(route, function(data) {
-                $('#resultado').html(data)
-            })
+                success: function(response) {
+                    $('#resultado').html(response)
+                },
+            });
         }
-
         lista()
 
         var myModal = new bootstrap.Modal(document.getElementById('editModal'))
-
-
 
         // Abre o Modal
         $("body").on('click', '.edit-local', function(e) {
@@ -195,20 +190,19 @@
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
-                console.log(data)
-                lista()
-                myModal.hide()
-                    ("#editForm")[0].reset()
-            }).fail(function(data) {
+                console.log(data);
+                lista();
+                myModal.hide();
+                $("#editForm")[0].reset();
 
-                $.toast({
-                    title: "Atenção",
-                    message: data.responseJSON.error,
-                    type: "error",
-                    duration: 2500,
-                });
-            })
-        })
+                swal("Sucesso!", "Item atualizado com sucesso.", "success");
+
+            }).fail(function(data) {
+                swal("Erro!", data.responseJSON.error || "Ocorreu um erro inesperado.", "error");
+            });
+
+        });
+
 
 
         // Deletando local sem atualizar a página
@@ -226,12 +220,25 @@
                     _token: "{{ csrf_token() }}",
                 },
                 success: function(response) {
-
                     lista();
+
+                    swal("Sucesso!", "Local deletado com sucesso.", "success");
                 },
+                error: function(response) {
+                    swal("Erro!", response.responseJSON.error || "Ocorreu um erro ao deletar o item.",
+                        "error");
+                }
+            });
 
-            })
+        });
 
-        })
+         // Paginação
+         $(document).on('click', '.pagination a',function(e) {
+            e.preventDefault()
+
+            var url = $(this).attr('href');
+            lista(url);
+        });
+
     </script>
 @endsection

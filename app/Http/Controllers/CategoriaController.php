@@ -10,16 +10,14 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categorias::orderBy('created_at', 'desc')->get();
-
-
+        $categorias = Categorias::orderBy('created_at', 'desc')->paginate(5);
+    
         return view('categorias.index', compact('categorias'));
     }
 
     public function getcategorias()
     {
-        $categorias = Categorias::orderBy('created_at', 'desc')->get();
-
+        $categorias = Categorias::orderBy('created_at', 'desc')->paginate(5);
 
         return view('categorias._lista', compact('categorias'));
     }

@@ -60,7 +60,7 @@
         @foreach ($listadecompras as $listadecompra)
             <div class="listagem card p-4">
                 <div class=" d-flex justify-content-between align-items-center">
-                    <h3>{{$listadecompra->local->nome }}</h3>
+                    <h3>{{$listadecompra->local->nome}}</h3>
                     
                     <div>
                         <a href="{{ route('minhascompras.show',['id' => $listadecompra->id]) }}" class=" btn-sm btn-outline-primary">
