@@ -37,7 +37,7 @@ class LocalController extends Controller
             'nome' => $request->input('local'),
             'usuario_id' => Auth::id(),
         ]);
-        return response()->json(["status" => "ok"]);
+        return response()->noContent();
     }
 
     public function destroy($id)
