@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    @vite('resources/sass/app.scss')
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    
     <title>Market2you</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no,user-scalable=no" name="viewport" />
     <link rel="icon" href="assets/img/kaiadmin/logo-market.png" type="image/x-icon" />
@@ -15,7 +15,7 @@
     <script>
         WebFont.load({
             google: {
-                families: ["Public Sans:300,400,500,600,700"]
+                families: ["Poppins:300,400,500,600,700"]
             },
             custom: {
                 families: [
@@ -49,10 +49,10 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <!-- <a href="{{ route('home') }}" class="logo">
-                        <img src="assets/img/kaiadmin/logo-market.png" alt="navbar brand" class="navbar-brand"
+                    <a href="{{ route('home') }}" class="logo">
+                        <img src="assets/img/kaiadmin/market-removebg-preview.png" alt="navbar brand" class="navbar-brand"
                             height="20" />
-                   </a -->
+                   </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
                             <i class="gg-menu-right"></i>

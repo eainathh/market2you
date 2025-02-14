@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    @vite('resources/sass/app.scss')
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Market2you</title>
@@ -12,7 +12,7 @@
     <script>
         WebFont.load({
             google: {
-                families: ["Public Sans:300,400,500,600,700"]
+                families: ["Poppins:300,400,500,600,700"]
             },
             custom: {
                 families: [

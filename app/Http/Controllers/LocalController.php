@@ -13,7 +13,7 @@ class LocalController extends Controller
     {
 
         $userId = Auth::id();
-        $locais = Locais::orderBy('created_at', 'desc')->get();
+        $locais = Locais::orderBy('created_at', 'desc')->paginate(5);
 
         return view('locais.index', compact('locais'));
     }
@@ -22,7 +22,7 @@ class LocalController extends Controller
     {
 
         $userId = Auth::id();
-        $locais = Locais::orderBy('created_at', 'desc')->get();
+        $locais = Locais::orderBy('created_at', 'desc')->paginate(5);
 
         return view('locais._lista', compact('locais'));
     }
@@ -37,7 +37,7 @@ class LocalController extends Controller
             'nome' => $request->input('local'),
             'usuario_id' => Auth::id(),
         ]);
-        return response()->json(["status" => "ok"]);
+        return response()->noContent();
     }
 
     public function destroy($id)
@@ -48,7 +48,7 @@ class LocalController extends Controller
         return response()->json();
     }
 
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
         $request->validate([
             'local' => 'required|string|max:255',
