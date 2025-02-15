@@ -5,14 +5,17 @@
 
 
 @section('content')
-    <div class="container-logo py-4">
+<div class="titulo-site pt-5">
+    <h2>Market2You</h2>
+</div>
+    <div class="container-logo ">
         <img src="assets/img/kaiadmin/market-removebg-preview.png" alt="navbar brand" class="navbar-brand" height="200"/>
     </div>
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card py-5">
+            <div class="col-md-5">
+                <div class="card py-2">
                     
 
                     <div class="card-body">
