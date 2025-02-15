@@ -77,13 +77,8 @@
                     {{ session('success') }}
                 </div>
             @endif
-<<<<<<< HEAD
             {{-- Collapse Cadastrar Local --}}
             <div class="collapse " id="addlocal">
-=======
-
-            {{-- <div class="collapse " id="addlocal">
->>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
                 <div class=" card-body">
                     <form action="{{ route('locais.store') }}" method="POST" id="form-store">
                         @csrf
@@ -157,11 +152,8 @@
 
 @section('scripts')
     <script>
-<<<<<<< HEAD
        
 
-=======
->>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
         // ajax para criar o local sem recarregar a página
         // $("#formcriarModal").submit(function(e) {
         //     e.preventDefault();
@@ -199,7 +191,6 @@
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
-<<<<<<< HEAD
                 console.log(data);
                 $('#resultado').html(data.html); // Atualiza a listagem se estiver retornando HTML
                 $("#form-store")[0].reset();
@@ -219,30 +210,6 @@
                 type: "GET",
                 dataType: 'html',
 
-=======
-                lista()
-                criarModal.hide();
-                ("#criarForm")[0].reset()
-            }).fail(function(data) {
-
-                $.toast({
-                    title: "Atenção",
-                    message: data.responseJSON.error,
-                    type: "error",
-                    duration: 2500, // auto-dismiss after 5s
-                });
-
-            });
-        })
-
-
-        function lista(url = "{{ route('locais.getlocais') }}") {
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: 'html',
-
->>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
                 success: function(response) {
                     $('#resultado').html(response)
                 },
@@ -251,13 +218,6 @@
         lista()
 
 
-<<<<<<< HEAD
-=======
-        var myModal = new bootstrap.Modal(document.getElementById('editModal'))
-        var criarModal = new bootstrap.Modal(document.getElementById('criarModal'))
-
-
->>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
         // Abre o Modal
         $("body").on('click', '.edit-local', function(e) {
             e.preventDefault();
@@ -282,7 +242,6 @@
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
-<<<<<<< HEAD
                 console.log(data);
                 lista();
                 myModal.hide();
@@ -295,13 +254,6 @@
             });
 
         });
-=======
-                console.log(data)
-                lista()
-                myModal.hide()
-                ("#editForm")[0].reset()
-            }).fail(function(data) {
->>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
 
 
 
@@ -340,16 +292,5 @@
             lista(url);
         });
 
-<<<<<<< HEAD
-=======
-        })
-
-        $(document).on('click', '.pagination a', function(e) {
-            e.preventDefault()
-
-            var url = $(this).attr('href');
-            lista(url);
-        });
->>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
     </script>
 @endsection
