@@ -61,7 +61,7 @@
                 <h1>Meus Locais</h1>
 
                 <div class="header-local">
-                    <h4>Listagem</h4>
+                    <h4></h4>
                     <p class="d-inline-flex gap-1 pb-2">
                         <a class="btn btn-primary" data-bs-toggle="modal" id="criar-local"href="#criarModal" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
