@@ -30,6 +30,7 @@
             <p>Listas de compras</p>
         </a>
     </li> --}}
+
     <li class="nav-item">
         <a href="{{ route('categorias.index') }}">
             <i class="fa-solid fa-layer-group"></i>
@@ -53,7 +54,7 @@
     <li class="nav-item">
         <a href="">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <p>Buscar Melhores preços</p>
+            <p>Melhores preços</p>
         </a>
     </li> 
 </ul>

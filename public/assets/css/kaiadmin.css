@@ -88,7 +88,7 @@ danger-color : #f3545d
 body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, .btn-simple, .alert, a, .td-name, td, button.close {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Public Sans', sans-serif; }
+  font-family: 'Poppins', sans-serif;
 
 body, html {
   font-size: 14px;
@@ -253,8 +253,11 @@ body {
   position: relative;
   background: #F5F7FD;
   background-size: cover;
+  font-family: 'Poppins', sans-serif;
+
   background-attachment: fixed;
   background-repeat: no-repeat; }
+  
 
 .body-overlay {
   position: absolute;

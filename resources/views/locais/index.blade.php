@@ -63,7 +63,7 @@
                 <div class="header-local">
                     <h4>Listagem</h4>
                     <p class="d-inline-flex gap-1 pb-2">
-                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#addlocal" role="button"
+                        <a class="btn btn-primary" data-bs-toggle="modal" id="criar-local"href="#criarModal" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
                             Adicionar
                         </a>
@@ -78,7 +78,7 @@
                 </div>
             @endif
 
-            <div class="collapse " id="addlocal">
+            {{-- <div class="collapse " id="addlocal">
                 <div class=" card-body">
                     <form action="{{ route('locais.store') }}" method="POST" id="form-store">
                         @csrf
@@ -87,7 +87,7 @@
                         <button type="submit" class="btn btn-success mt-3">Salvar</button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
 
             <div id="resultado">
@@ -96,6 +96,31 @@
 
         </div>
     </div>
+
+
+    <div class="modal fade" id="criarModal" tabindex="-1" aria-labelledby="criarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" action="{{ route('locais.store') }}" id="criarForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="criarModalLabel">Novo local</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="local" class="form-label">Novo local</label>
+                            <input type="text" class="form-control" name="local" id="criarLocalInput" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 
 
@@ -127,22 +152,46 @@
 
 @section('scripts')
     <script>
-   
-
-
         // ajax para criar o local sem recarregar a página
-        $("#form-store").submit(function(e) {
+        // $("#formcriarModal").submit(function(e) {
+        //     e.preventDefault();
+
+        //     $.ajax({
+        //         method: "POST",
+        //         data: $(this).serialize(),
+        //         url: $(this).attr('action'),
+        //     }).done(function(data) {
+        //         console.log(data)
+        //         lista()
+        //         $("#form-store")[0].reset()
+
+        //     }).fail(function(data) {
+
+        //         $.toast({
+        //             title: "Atenção",
+        //             message: data.responseJSON.error,
+        //             type: "error",
+        //             duration: 2500, // auto-dismiss after 5s
+        //         });
+
+        //     });
+
+
+        // })
+
+        $("body").on('click', '#criar-local', function(e) {
             e.preventDefault();
+
+            var route = $(this).attr('href')
 
             $.ajax({
                 method: "POST",
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
-                console.log(data)
                 lista()
-                $("#form-store")[0].reset()
-                
+                criarModal.hide();
+                ("#criarForm")[0].reset()
             }).fail(function(data) {
 
                 $.toast({
@@ -151,11 +200,10 @@
                     type: "error",
                     duration: 2500, // auto-dismiss after 5s
                 });
-                
+
             });
-
-
         })
+
 
         function lista(url = "{{ route('locais.getlocais') }}") {
             $.ajax({
@@ -172,7 +220,7 @@
 
 
         var myModal = new bootstrap.Modal(document.getElementById('editModal'))
-
+        var criarModal = new bootstrap.Modal(document.getElementById('criarModal'))
 
 
         // Abre o Modal
@@ -202,7 +250,7 @@
                 console.log(data)
                 lista()
                 myModal.hide()
-                    ("#editForm")[0].reset()
+                ("#editForm")[0].reset()
             }).fail(function(data) {
 
                 $.toast({
@@ -238,7 +286,7 @@
 
         })
 
-        $(document).on('click', '.pagination a',function(e) {
+        $(document).on('click', '.pagination a', function(e) {
             e.preventDefault()
 
             var url = $(this).attr('href');
