@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('assets')
+
     <style>
         .header-local {
             display: flex;
@@ -50,10 +51,11 @@
             width: 300px;
         }
 
-        #resultado{
+        #resultado {
             display: flex;
             gap: 25px;
-            
+            flex-wrap: wrap;
+
         }
     </style>
 @endsection
@@ -69,10 +71,10 @@
                 <div class="header-local">
                     <h4></h4>
                     <p class="d-inline-flex gap-1 pb-2">
-                        <a class="btn btn-primary" data-bs-toggle="modal" id="criar-local"href="#criarModal" role="button"
+                        <button class="btn btn-primary" data-bs-toggle="modal" id="criar-local"href="#criarModal" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
                             Adicionar
-                        </a>
+                        </button>
                     </p>
                 </div>
 
@@ -110,7 +112,7 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="criarModalLabel">Novo local</h5>
+                        <h5 class="modal-title" id="criarModalLabel">Cadastrar local</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -185,30 +187,36 @@
 
         // })
 
-        $("body").on('click', '#criar-local', function(e) {
-            e.preventDefault();
+        $(document).ready(function() {
+            // Submissão do formulário de criação via AJAX
+            $('#criarForm').on('submit', function(e) {
+                e.preventDefault();
 
-            var route = $(this).attr('href')
+                var form = $(this);
+                var url = form.attr('action');
+                var data = form.serialize();
 
-            $.ajax({
-                method: "POST",
-                data: $(this).serialize(),
-                url: $(this).attr('action'),
-            }).done(function(data) {
-                lista()
-                criarModal.hide();
-                ("#criarForm")[0].reset()
-            }).fail(function(data) {
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: data,
+                    success: function(response) {
+                        lista();
+                        $('#criarModal').modal('hide');
+                        form[0].reset();
+                        $.toast({
 
-                $.toast({
-                    title: "Atenção",
-                    message: data.responseJSON.error,
-                    type: "error",
-                    duration: 2500, // auto-dismiss after 5s
+                        });
+                        
+                        // alert('Local cadastrado com sucesso!');
+                    },
+                    error: function(xhr) {
+                        alert('Erro ao cadastrar o local. Por favor, tente novamente.');
+                    }
                 });
-
             });
-        })
+        });
+
 
 
         function lista(url = "{{ route('locais.getlocais') }}") {
@@ -256,7 +264,7 @@
                 console.log(data)
                 lista()
                 myModal.hide()
-                ("#editForm")[0].reset()
+                    ("#editForm")[0].reset()
             }).fail(function(data) {
 
                 $.toast({
