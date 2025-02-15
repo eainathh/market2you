@@ -63,7 +63,7 @@
                 <div class="header-local">
                     <h4>Listagem</h4>
                     <p class="d-inline-flex gap-1 pb-2">
-                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#addlocal" role="button"
+                        <a class="btn btn-primary" data-bs-toggle="modal" id="criar-local"href="#criarModal" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
                             Adicionar
                         </a>
@@ -77,8 +77,13 @@
                     {{ session('success') }}
                 </div>
             @endif
+<<<<<<< HEAD
             {{-- Collapse Cadastrar Local --}}
             <div class="collapse " id="addlocal">
+=======
+
+            {{-- <div class="collapse " id="addlocal">
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
                 <div class=" card-body">
                     <form action="{{ route('locais.store') }}" method="POST" id="form-store">
                         @csrf
@@ -87,7 +92,7 @@
                         <button type="submit" class="btn btn-success my-3">Salvar</button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
 
             <div id="resultado">
@@ -98,8 +103,33 @@
     </div>
 
 
+    <div class="modal fade" id="criarModal" tabindex="-1" aria-labelledby="criarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" action="{{ route('locais.store') }}" id="criarForm">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="criarModalLabel">Novo local</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="local" class="form-label">Novo local</label>
+                            <input type="text" class="form-control" name="local" id="criarLocalInput" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    {{-- MODAL DE EDICAO --}}
+
+
+
+
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form method="POST" id="editForm">
@@ -127,17 +157,49 @@
 
 @section('scripts')
     <script>
+<<<<<<< HEAD
        
 
+=======
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
         // ajax para criar o local sem recarregar a página
-        $("#form-store").submit(function(e) {
+        // $("#formcriarModal").submit(function(e) {
+        //     e.preventDefault();
+
+        //     $.ajax({
+        //         method: "POST",
+        //         data: $(this).serialize(),
+        //         url: $(this).attr('action'),
+        //     }).done(function(data) {
+        //         console.log(data)
+        //         lista()
+        //         $("#form-store")[0].reset()
+
+        //     }).fail(function(data) {
+
+        //         $.toast({
+        //             title: "Atenção",
+        //             message: data.responseJSON.error,
+        //             type: "error",
+        //             duration: 2500, // auto-dismiss after 5s
+        //         });
+
+        //     });
+
+
+        // })
+
+        $("body").on('click', '#criar-local', function(e) {
             e.preventDefault();
+
+            var route = $(this).attr('href')
 
             $.ajax({
                 method: "POST",
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
+<<<<<<< HEAD
                 console.log(data);
                 $('#resultado').html(data.html); // Atualiza a listagem se estiver retornando HTML
                 $("#form-store")[0].reset();
@@ -157,6 +219,30 @@
                 type: "GET",
                 dataType: 'html',
 
+=======
+                lista()
+                criarModal.hide();
+                ("#criarForm")[0].reset()
+            }).fail(function(data) {
+
+                $.toast({
+                    title: "Atenção",
+                    message: data.responseJSON.error,
+                    type: "error",
+                    duration: 2500, // auto-dismiss after 5s
+                });
+
+            });
+        })
+
+
+        function lista(url = "{{ route('locais.getlocais') }}") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: 'html',
+
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
                 success: function(response) {
                     $('#resultado').html(response)
                 },
@@ -164,8 +250,14 @@
         }
         lista()
 
-        var myModal = new bootstrap.Modal(document.getElementById('editModal'))
 
+<<<<<<< HEAD
+=======
+        var myModal = new bootstrap.Modal(document.getElementById('editModal'))
+        var criarModal = new bootstrap.Modal(document.getElementById('criarModal'))
+
+
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
         // Abre o Modal
         $("body").on('click', '.edit-local', function(e) {
             e.preventDefault();
@@ -190,6 +282,7 @@
                 data: $(this).serialize(),
                 url: $(this).attr('action'),
             }).done(function(data) {
+<<<<<<< HEAD
                 console.log(data);
                 lista();
                 myModal.hide();
@@ -202,6 +295,13 @@
             });
 
         });
+=======
+                console.log(data)
+                lista()
+                myModal.hide()
+                ("#editForm")[0].reset()
+            }).fail(function(data) {
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
 
 
 
@@ -240,5 +340,16 @@
             lista(url);
         });
 
+<<<<<<< HEAD
+=======
+        })
+
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault()
+
+            var url = $(this).attr('href');
+            lista(url);
+        });
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
     </script>
 @endsection

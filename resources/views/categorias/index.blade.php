@@ -174,7 +174,11 @@
             })
         })
 
+<<<<<<< HEAD
         function carregalista(url="{{ route('categorias.getcategorias') }}") {
+=======
+        function carregalista(url = "{{ route('categorias.getcategorias') }}") {
+>>>>>>> dda6d27cf97c4f7cdc81b4fb331d66460a709d4b
             $.ajax({
                 url: url,
                 type: "GET",
@@ -183,6 +187,13 @@
                     $('#resposta').html(response);
                 }
             })
+                success: function(response) {
+                    $('#resposta').html(response); // Atualiza o conteúdo da div resposta
+                },
+                error: function(xhr, status, error) {
+                    console.log('Erro ao carregar a lista de categorias: ' + error);
+                }
+            });
         }
 
         carregalista()
@@ -236,6 +247,12 @@
             })
         })
 
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+
+            var url = $(this).attr('href');
+            carregalista(url);
+        });
 
 
         // Deletar a categoria sem atualizar a página
