@@ -29,7 +29,7 @@ class Listadecompras extends Model
     }
     public function local()
     {
-        return $this->belongsTo(Locais::class,'local_id');
+        return $this->belongsTo(Locais::class,'local_id', 'id');
     }
 
     public function itens_compras()

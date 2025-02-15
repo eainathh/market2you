@@ -49,6 +49,12 @@
             border-color: #c3e6cb;
             width: 300px;
         }
+
+        #resultado{
+            display: flex;
+            gap: 25px;
+            
+        }
     </style>
 @endsection
 @section('content')

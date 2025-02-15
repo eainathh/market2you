@@ -1,5 +1,15 @@
+@section('assets')
+    <style>
+.card-local {
+width: 20%;
+
+
+
+}
+        </style>
+
 @foreach ($locais as $local)
-    <div class="listagem card p-4">
+    <div class="listagem card p-4 card-local ">
         <div class=" d-flex justify-content-between align-items-center">
             <h3>{{ $local->nome }}</h3>
             <div>
@@ -30,7 +40,7 @@
             </div>
             <div>
                 <p>Posição</p>
-                <p>5°</p>
+                <p>x°</p>
             </div>
 
         </div>
