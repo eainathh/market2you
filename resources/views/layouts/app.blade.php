@@ -51,7 +51,7 @@
                 <div class="logo-header" data-background-color="dark">
                     <a href="{{ route('home') }}" class="logo">
                         <img src="assets/img/kaiadmin/market-removebg-preview.png" alt="navbar brand" class="navbar-brand"
-                            height="20" />
+                            height="70" />
                    </a>
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
@@ -199,12 +199,12 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bell"></i>
-                                    <span class="notification">4</span>
+                                    {{-- <span class="notification">1</span> --}}
                                 </a>
                                 <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
                                     <li>
                                         <div class="dropdown-title">
-                                            You have 4 new notification
+                                            Você tem x notificações
                                         </div>
                                     </li>
                                     <li>
@@ -215,46 +215,17 @@
                                                         <i class="fa fa-user-plus"></i>
                                                     </div>
                                                     <div class="notif-content">
-                                                        <span class="block"> New user registered </span>
-                                                        <span class="time">5 minutes ago</span>
+                                                        <span class="block"> Novo usuário registrado </span>
+                                                        <span class="time">5 minutos atrás</span>
                                                     </div>
                                                 </a>
-                                                <a href="#">
-                                                    <div class="notif-icon notif-success">
-                                                        <i class="fa fa-comment"></i>
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="block">
-                                                            Rahmad commented on Admin
-                                                        </span>
-                                                        <span class="time">12 minutes ago</span>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="notif-img">
-                                                        <img src="assets/img/profile2.jpg" alt="Img Profile" />
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="block">
-                                                            Reza send messages to you
-                                                        </span>
-                                                        <span class="time">12 minutes ago</span>
-                                                    </div>
-                                                </a>
-                                                <a href="#">
-                                                    <div class="notif-icon notif-danger">
-                                                        <i class="fa fa-heart"></i>
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="block"> Farrah liked Admin </span>
-                                                        <span class="time">17 minutes ago</span>
-                                                    </div>
+                                                
                                                 </a>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
-                                        <a class="see-all" href="javascript:void(0);">See all notifications<i
+                                        <a class="see-all" href="javascript:void(0);">Mostrar todas notificações<i
                                                 class="fa fa-angle-right"></i>
                                         </a>
                                     </li>
@@ -334,7 +305,7 @@
                                             class="avatar-img rounded-circle" />
                                     </div>
                                     <span class="profile-username">
-                                        <span class="op-7">Olá,{{ Auth::user()->name }}</span>
+                                        <span class="op-7">Olá, {{ Auth::user()->name }}</span>
                                         <span class="fw-bold"></span>
                                     </span>
                                 </a>
