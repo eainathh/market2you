@@ -1,5 +1,21 @@
+@section('assets')
+<style>
+.listagem{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 20px; /* Espaçamento entre os cards */
+
+}
+
+
+
+</style>
+
+@endsection
+
 @foreach ($categorias as $categoria)
-    <div class="listagem card p-4">
+    <div class="listagem card p-2">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h3>{{ $categoria->nome }}</h3>
             <div>

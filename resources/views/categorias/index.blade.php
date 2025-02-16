@@ -61,6 +61,12 @@
             border-color: #c3e6cb;
             width: 300px;
         }
+
+        #resposta{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
     </style>
 @endsection
 
